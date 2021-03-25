@@ -14,14 +14,14 @@ Put this into your Broot config, e.g. `$XDG_CONFIG_HOME/broot/conf.hjson`
 
 ```
 verbs: [
-		{
-			invocation: terminal
-      # use any keybinding your want to print the path
-      # such that nvim can read it via the plugin, e.g. "ctrl-o" or "entry"
-			key: ctrl-o
-			execution: ":print_path"
-			apply_to: file
-		}
+  {
+    invocation: terminal
+    # use any keybinding your want to print the path
+    # such that nvim can read it via the plugin, e.g. "ctrl-o" or "entry"
+    key: ctrl-o
+    execution: ":print_path"
+    apply_to: file
+  }
 ]
 ```
 
