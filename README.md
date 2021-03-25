@@ -1,5 +1,7 @@
 # broot.nvim lightweight broot integration plugin for nvim
 
+This is a lightweight integration plugin for [Broot](https://github.com/Canop/broot) and [neovim](https://neovim.io/).
+
 Sorry vim, you can use the plugin from [broot.vim](https://gitlab.com/lstwn/broot.vim/-/tree/master)
 
 [![asciicast](https://asciinema.org/a/402488.svg)](https://asciinema.org/a/402488)
