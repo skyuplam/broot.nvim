@@ -2,6 +2,8 @@
 
 Sorry vim, you can use the plugin from [broot.vim](https://gitlab.com/lstwn/broot.vim/-/tree/master)
 
+[![asciicast](https://asciinema.org/a/402488.svg)](https://asciinema.org/a/402488)
+
 ## Installation
 
 Use your favorite plugin manager or use packer.nvim
