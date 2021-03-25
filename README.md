@@ -1,6 +1,6 @@
 # broot.nvim lightweight broot integration plugin for nvim
 
-This is a lightweight integration plugin for [Broot](https://github.com/Canop/broot) and [neovim](https://neovim.io/).
+This is a lightweight integration plugin for [Broot](https://github.com/Canop/broot) and [neovim](https://neovim.io/) for a replacement of NerdTree plugin
 
 Sorry vim, you can use the plugin from [broot.vim](https://gitlab.com/lstwn/broot.vim/-/tree/master)
 
@@ -8,7 +8,7 @@ Sorry vim, you can use the plugin from [broot.vim](https://gitlab.com/lstwn/broo
 
 ## Installation
 
-Use your favorite plugin manager or use packer.nvim
+Use your favorite plugin manager or use [packer.nvim](https://github.com/wbthomason/packer.nvim)
 
 ```
 use 'skyuplam/broot.nvim'
