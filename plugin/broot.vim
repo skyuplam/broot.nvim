@@ -1,25 +1,28 @@
 let s:broot_command = 'broot'
 let s:out_file_path = tempname()
 
+function! s:brootCallback(code) abort
+  if a:code == 0
+    silent! Bclose!
+  endif
+  try
+    if filereadable(s:out_file_path)
+      for f in readfile(s:out_file_path)
+        exec self.edit_cmd . f
+      endfor
+      call delete(s:out_file_path)
+    endif
+  endtry
+endfunction
+
 function! OpenBrootIn(path, edit_cmd)
   let currentPath = expand(a:path) ? expand(a:path) : expand(".")
-  let brootCallback = { 'name': 'broot', 'edit_cmd': a:edit_cmd }
-  function! brootCallback.on_exit(job_id, code, event)
-    if a:code == 0
-      silent! Bclose!
-    endif
-    try
-      if filereadable(s:out_file_path)
-        for f in readfile(s:out_file_path)
-          exec self.edit_cmd . f
-        endfor
-        call delete(s:out_file_path)
-      endif
-    endtry
-  endfunction
   enew
-  echom currentPath
-  call termopen(s:broot_command . ' --out=' . s:out_file_path . ' "' . currentPath . '"', brootCallback)
+  call termopen(s:broot_command . ' --out=' . s:out_file_path . ' "' . currentPath . '"', {
+        \ 'name': 'broot',
+        \ 'edit_cmd': a:edit_cmd,
+        \ 'on_exit': {status, code -> s:brootCallback(code)},
+        \ })
   startinsert
 endfunction
 
@@ -29,11 +32,6 @@ command! BrootCurrentFile call OpenBrootIn("%", s:default_edit_cmd)
 command! BrootCurrentDirectory call OpenBrootIn("%:p:h", s:default_edit_cmd)
 command! BrootWorkingDirectory call OpenBrootIn(".", s:default_edit_cmd)
 command! Broot BrootCurrentFile
-
-" For retro-compatibility
-function! OpenBroot()
-  Broot
-endfunction
 
 " Open Broot in the directory passed by argument
 function! OpenBrootOnVimLoadDir(argv_path)
