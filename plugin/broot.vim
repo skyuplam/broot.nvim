@@ -1,14 +1,14 @@
 let s:broot_command = 'broot'
 let s:out_file_path = tempname()
 
-function! s:brootCallback(code) abort
+function! s:brootCallback(code, cmd) abort
   if a:code == 0
     silent! Bclose!
   endif
   try
     if filereadable(s:out_file_path)
       for f in readfile(s:out_file_path)
-        exec self.edit_cmd . f
+        exec a:cmd . f
       endfor
       call delete(s:out_file_path)
     endif
@@ -20,8 +20,7 @@ function! OpenBrootIn(path, edit_cmd)
   enew
   call termopen(s:broot_command . ' --out=' . s:out_file_path . ' "' . currentPath . '"', {
         \ 'name': 'broot',
-        \ 'edit_cmd': a:edit_cmd,
-        \ 'on_exit': {status, code -> s:brootCallback(code)},
+        \ 'on_exit': {status, code -> s:brootCallback(code, a:edit_cmd)},
         \ })
   startinsert
 endfunction
