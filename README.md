@@ -13,7 +13,10 @@ Use your favorite plugin manager, e.g. [packer.nvim](https://github.com/wbthomas
 
 ```
 use 'skyuplam/broot.nvim'
+use 'rbgrouleff/bclose.vim'
 ```
+
+You need [bclose.vim](https://github.com/rbgrouleff/bclose.vim)
 
 Put this into your Broot config, e.g. `$XDG_CONFIG_HOME/broot/conf.hjson` to map
 a key-binding to `:print_path` such that you can use the key-binding to open the
