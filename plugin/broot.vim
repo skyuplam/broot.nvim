@@ -16,7 +16,7 @@ function! s:brootCallback(code, cmd) abort
 endfunction
 
 function! OpenBrootIn(path, edit_cmd)
-  let currentPath = expand(a:path) ? expand(a:path) : expand(".")
+  let currentPath = len(expand(a:path)) != 0 ? expand(a:path) : expand(".")
   enew
   call termopen(s:broot_command . ' --out=' . s:out_file_path . ' "' . currentPath . '"', {
         \ 'name': 'broot',
