@@ -11,28 +11,30 @@ Sorry vim, you can use the plugin from [broot.vim](https://gitlab.com/lstwn/broo
 
 Use your favorite plugin manager, e.g. [packer.nvim](https://github.com/wbthomason/packer.nvim)
 
-```
+```lua
 use 'skyuplam/broot.nvim'
 use 'rbgrouleff/bclose.vim'
 ```
 
-You need [bclose.vim](https://github.com/rbgrouleff/bclose.vim)
+You need [bclose.vim](https://github.com/rbgrouleff/bclose.vim) to close the
+opened buffer
 
-Put this into your Broot config, e.g. `$XDG_CONFIG_HOME/broot/conf.hjson` to map
-a key-binding to `:print_path` such that you can use the key-binding to open the
-file inside nvim from broot
+Put this beside your Broot config, e.g. `$XDG_CONFIG_HOME/broot/nvim.hjson` to
+override the default `enter` key-binding to allow open with the running nvim
+client
 
-```
-verbs: [
-  {
-    invocation: terminal
-    # use any key-binding your want to print the path
-    # such that nvim can read it via the plugin, e.g. "ctrl-o" or "entry"
-    key: ctrl-o
-    execution: ":print_path"
-    apply_to: file
-  }
-]
+```hjson
+# $XDG_CONFIG_HOME/broot/nvim.hjson
+{
+  verbs: [
+    {
+      invocation: terminal
+      key: enter
+      execution: ":print_path"
+      apply_to: file
+    }
+  ]
+}
 ```
 
 When the plugin is installed, use `:Broot` to launch Broot, and use the key-binding

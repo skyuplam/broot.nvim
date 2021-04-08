@@ -1,5 +1,8 @@
 let s:broot_command = 'broot'
 let s:out_file_path = tempname()
+let s:broot_default_config_path = fnamemodify(expand('$XDG_CONFIG_HOME/broot/conf.hjson'), ':p')
+let s:broot_nvim_config_path = fnamemodify(s:broot_default_config_path, ':h') . '/nvim.hjson'
+let s:broot_config_path = s:broot_default_config_path . ';' . s:broot_nvim_config_path
 
 function! s:brootCallback(code, cmd) abort
   if a:code == 0
@@ -17,8 +20,15 @@ endfunction
 
 function! OpenBrootIn(path, edit_cmd)
   let currentPath = len(expand(a:path)) != 0 ? expand(a:path) : expand(".")
+  let cmd = printf(
+        \ '%s --conf "%s" --out "%s" "%s"',
+        \ s:broot_command,
+        \ s:broot_config_path,
+        \ s:out_file_path,
+        \ currentPath
+        \ )
   enew
-  call termopen(s:broot_command . ' --out=' . s:out_file_path . ' "' . currentPath . '"', {
+  call termopen(cmd, {
         \ 'name': 'broot',
         \ 'on_exit': {status, code -> s:brootCallback(code, a:edit_cmd)},
         \ })
