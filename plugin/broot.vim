@@ -1,6 +1,11 @@
 let s:broot_command = 'broot'
 let s:out_file_path = tempname()
-let s:broot_default_config_path = fnamemodify(expand('$XDG_CONFIG_HOME/broot/conf.hjson'), ':p')
+if has("win64") || has("win32") || has("win16")
+    " Path if broot was installed by winget on Windows
+    let s:broot_default_config_path = fnamemodify(expand('$HOME/AppData/Roaming/dystroy/broot/config/conf.hjson'), ':p')
+else
+    let s:broot_default_config_path = fnamemodify(expand('$XDG_CONFIG_HOME/broot/conf.hjson'), ':p')
+endif
 let s:broot_nvim_config_path = fnamemodify(s:broot_default_config_path, ':h') . '/nvim.hjson'
 let s:broot_config_path = s:broot_default_config_path . ';' . s:broot_nvim_config_path
 
