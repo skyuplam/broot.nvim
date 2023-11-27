@@ -21,7 +21,7 @@ endfunction
 function! OpenBrootIn(path, edit_cmd)
   let currentPath = len(expand(a:path)) != 0 ? expand(a:path) : expand(".")
   let cmd = printf(
-        \ '%s --conf "%s" --out "%s" "%s"',
+        \ '%s --conf "%s" --outcmd "%s" "%s"',
         \ s:broot_command,
         \ s:broot_config_path,
         \ s:out_file_path,
